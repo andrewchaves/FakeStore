@@ -13,6 +13,8 @@
 		876B04DC2D499AAB004F77C7 /* MainListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04D62D499AAB004F77C7 /* MainListViewController.swift */; };
 		876B04DD2D499AAB004F77C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 876B04CE2D499AAB004F77C7 /* Assets.xcassets */; };
 		876B04DF2D499AAB004F77C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 876B04D22D499AAB004F77C7 /* LaunchScreen.storyboard */; };
+		876B04EE2D4B1122004F77C7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04ED2D4B1122004F77C7 /* Product.swift */; };
+		876B04F02D4B1199004F77C7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04EF2D4B1199004F77C7 /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		876B04D52D499AAB004F77C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		876B04D62D499AAB004F77C7 /* MainListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListViewController.swift; sourceTree = "<group>"; };
 		876B04D82D499AAB004F77C7 /* FakeStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FakeStore.xcdatamodel; sourceTree = "<group>"; };
+		876B04ED2D4B1122004F77C7 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		876B04EF2D4B1199004F77C7 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -123,6 +127,7 @@
 		876B04E12D499ABD004F77C7 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				876B04EF2D4B1199004F77C7 /* Service.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 		876B04E22D499AC7004F77C7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				876B04ED2D4B1122004F77C7 /* Product.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -310,8 +316,10 @@
 			files = (
 				876B04D92D499AAB004F77C7 /* AppDelegate.swift in Sources */,
 				876B04DA2D499AAB004F77C7 /* FakeStore.xcdatamodeld in Sources */,
+				876B04EE2D4B1122004F77C7 /* Product.swift in Sources */,
 				876B04DB2D499AAB004F77C7 /* SceneDelegate.swift in Sources */,
 				876B04DC2D499AAB004F77C7 /* MainListViewController.swift in Sources */,
+				876B04F02D4B1199004F77C7 /* Service.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

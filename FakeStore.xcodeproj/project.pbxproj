@@ -15,6 +15,7 @@
 		876B04DF2D499AAB004F77C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 876B04D22D499AAB004F77C7 /* LaunchScreen.storyboard */; };
 		876B04EE2D4B1122004F77C7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04ED2D4B1122004F77C7 /* Product.swift */; };
 		876B04F02D4B1199004F77C7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04EF2D4B1199004F77C7 /* Service.swift */; };
+		876B04F22D4C58FE004F77C7 /* ProductVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04F12D4C58FE004F77C7 /* ProductVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		876B04D82D499AAB004F77C7 /* FakeStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FakeStore.xcdatamodel; sourceTree = "<group>"; };
 		876B04ED2D4B1122004F77C7 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		876B04EF2D4B1199004F77C7 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		876B04F12D4C58FE004F77C7 /* ProductVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -143,6 +145,7 @@
 		876B04E32D499AD6004F77C7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				876B04F12D4C58FE004F77C7 /* ProductVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				876B04DA2D499AAB004F77C7 /* FakeStore.xcdatamodeld in Sources */,
 				876B04EE2D4B1122004F77C7 /* Product.swift in Sources */,
 				876B04DB2D499AAB004F77C7 /* SceneDelegate.swift in Sources */,
+				876B04F22D4C58FE004F77C7 /* ProductVM.swift in Sources */,
 				876B04DC2D499AAB004F77C7 /* MainListViewController.swift in Sources */,
 				876B04F02D4B1199004F77C7 /* Service.swift in Sources */,
 			);

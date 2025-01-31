@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum HTTPMethod: String {
     case GET = "GET"
@@ -20,6 +21,7 @@ enum APIError: Error {
     case networkError(Error)
     case invalidResponse
     case decodingError
+    case unknownError
 }
 
 class Service {
@@ -30,7 +32,7 @@ class Service {
                                     method: HTTPMethod,
                                     body: Data? = nil,
                                     headers: [String: String] = [:],
-                                    reponseType: T.Type) async throws -> T {
+                                    reponseType: T.Type) async throws -> AnyPublisher<T, APIError> {
         //Check if url is ok
         guard let url = URL(string: "\(baseURL)\(endPoint)") else {
             throw APIError.invalidURL
@@ -48,15 +50,21 @@ class Service {
         //Perform request
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
+            
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                      throw APIError.invalidResponse
-                  }
-            do {
-                return try JSONDecoder().decode(T.self, from: data)
-            } catch {
-                throw APIError.decodingError
+                throw APIError.invalidResponse
             }
+            return Just(data)
+                .decode(type: T.self, decoder: JSONDecoder())
+                .mapError { error in
+                    if let decodingError = error as? DecodingError {
+                        return APIError.decodingError
+                    } else {
+                        return APIError.unknownError
+                    }
+                }
+                .eraseToAnyPublisher()
         } catch {
             throw APIError.networkError(error)
         }

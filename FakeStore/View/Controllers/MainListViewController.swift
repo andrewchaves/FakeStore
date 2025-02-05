@@ -16,11 +16,9 @@ class MainListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+        tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: "cell")
         
         bindViewModel()
         productVM.fetchProducts()
@@ -39,8 +37,10 @@ class MainListViewController: UIViewController {
     func bluidScreen() {
         
         self.view.backgroundColor = .white
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 160
         
         NSLayoutConstraint.activate(
             [tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -60,11 +60,13 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? UITableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ProductTableViewCell else {
             return UITableViewCell()
         }
         
-        cell.textLabel?.text = productVM.products[indexPath.row].title
+        cell.fill(image: productVM.products[indexPath.row].image,
+                  title: productVM.products[indexPath.row].title,
+                  price: productVM.products[indexPath.row].price)
         return cell
     }
 }

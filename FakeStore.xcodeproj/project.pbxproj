@@ -16,6 +16,7 @@
 		876B04EE2D4B1122004F77C7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04ED2D4B1122004F77C7 /* Product.swift */; };
 		876B04F02D4B1199004F77C7 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04EF2D4B1199004F77C7 /* Service.swift */; };
 		876B04F22D4C58FE004F77C7 /* ProductVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04F12D4C58FE004F77C7 /* ProductVM.swift */; };
+		876B04FA2D540A75004F77C7 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04F92D540A75004F77C7 /* ProductTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		876B04ED2D4B1122004F77C7 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		876B04EF2D4B1199004F77C7 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		876B04F12D4C58FE004F77C7 /* ProductVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVM.swift; sourceTree = "<group>"; };
+		876B04F92D540A75004F77C7 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -170,6 +172,7 @@
 		876B04E62D499B21004F77C7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				876B04F92D540A75004F77C7 /* ProductTableViewCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				876B04D92D499AAB004F77C7 /* AppDelegate.swift in Sources */,
+				876B04FA2D540A75004F77C7 /* ProductTableViewCell.swift in Sources */,
 				876B04DA2D499AAB004F77C7 /* FakeStore.xcdatamodeld in Sources */,
 				876B04EE2D4B1122004F77C7 /* Product.swift in Sources */,
 				876B04DB2D499AAB004F77C7 /* SceneDelegate.swift in Sources */,

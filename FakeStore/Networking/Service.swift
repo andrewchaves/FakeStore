@@ -58,7 +58,7 @@ class Service {
             return Just(data)
                 .decode(type: T.self, decoder: JSONDecoder())
                 .mapError { error in
-                    if let decodingError = error as? DecodingError {
+                    if let _ = error as? DecodingError {
                         return APIError.decodingError
                     } else {
                         return APIError.unknownError

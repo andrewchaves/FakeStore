@@ -7,13 +7,13 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 
 class ProductTableViewCell: UITableViewCell {
     
     var productImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
         imageView.contentMode = .scaleAspectFit
         imageView.layer.shadowColor = UIColor.gray.cgColor
         imageView.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
@@ -78,7 +78,7 @@ class ProductTableViewCell: UITableViewCell {
     func fill(image:String,
               title: String,
               price: String) {
-        self.productImageView.image = UIImage(named: "")
+        self.productImageView.sd_setImage(with: URL(string: image))
         self.productTitle.text = title
         self.productPrice.text = price
     }

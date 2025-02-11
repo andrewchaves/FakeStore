@@ -8,6 +8,20 @@
 import Foundation
 import Combine
 
+enum APIEndpoint {
+    case products
+    case categories
+    
+    var path: String {
+        switch self {
+        case .products:
+            return "/products"
+        case .categories:
+            return "/products/categories"
+        }
+    }
+}
+
 enum HTTPMethod: String {
     case GET = "GET"
     case POST = "POST"
@@ -28,13 +42,13 @@ class Service {
     
     private let baseURL: String = "https://fakestoreapi.com"
     
-    func makeRequest<T: Decodable> (endPoint: String,
+    func makeRequest<T: Decodable> (endPoint: APIEndpoint,
                                     method: HTTPMethod,
                                     body: Data? = nil,
                                     headers: [String: String] = [:],
                                     reponseType: T.Type) async throws -> AnyPublisher<T, APIError> {
         //Check if url is ok
-        guard let url = URL(string: "\(baseURL)\(endPoint)") else {
+        guard let url = URL(string: "\(baseURL)\(endPoint.path)") else {
             throw APIError.invalidURL
         }
         

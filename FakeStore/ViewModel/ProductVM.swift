@@ -29,7 +29,7 @@ class ProductVM {
         isLoading = true
         Task {
             do {
-                try await service.makeRequest(endPoint: "/products", method: .GET, reponseType: [Product].self)
+                try await service.makeRequest(endPoint: .products, method: .GET, reponseType: [Product].self)
                     .receive(on: DispatchQueue.main)
                     .sink(receiveCompletion: { [weak self] completion in
                         self?.isLoading = false

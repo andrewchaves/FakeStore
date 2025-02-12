@@ -24,16 +24,18 @@ class MainListViewController: UIViewController {
         
         bindViewModel()
         productVM.fetchProducts()
+        setupNavigationBar()
         bluidScreen()
     }
     
-    private func bindViewModel() {
-        productVM.$products
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] _ in
-                self?.tableView.reloadData()
-            })
-            .store(in: &cancellables)
+    //MARK: - Setup
+    func setupNavigationBar() {
+        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"),
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(filterButtonTapped))
+        filterButton.tintColor = .black
+        navigationItem.rightBarButtonItem = filterButton
     }
     
     func bluidScreen() {
@@ -52,6 +54,20 @@ class MainListViewController: UIViewController {
             ])
     }
     
+    //MARK: - Bindings
+    private func bindViewModel() {
+        productVM.$products
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
+            .store(in: &cancellables)
+    }
+    
+    //MARK: - Actions
+    @objc private func filterButtonTapped() {
+        print("Open context Menu")
+    }
 }
 
 // MARK: - Tableview methods

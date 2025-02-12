@@ -16,6 +16,8 @@ class MainListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Fake Store"
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -46,7 +48,7 @@ class MainListViewController: UIViewController {
             [tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
              tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
              tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-             tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
             ])
     }
     

@@ -15,7 +15,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = MainListViewController()
+        
+        //Creating a root nav controller
+        let mainListController = MainListViewController()
+        let rootNavigationController = UINavigationController(rootViewController: mainListController)
+        rootNavigationController.navigationBar.prefersLargeTitles = true
+        
+        // Add the root nav controller to window
+        window.rootViewController = rootNavigationController
         window.makeKeyAndVisible()
         self.window = window
     }

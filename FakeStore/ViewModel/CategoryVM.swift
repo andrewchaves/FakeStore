@@ -17,7 +17,7 @@ class CategorytVM {
     private var cancellables = Set<AnyCancellable>()
     private let service = Service()
     
-    func fetchProducts() {
+    func fetchCategories() {
         isLoading = true
         Task {
             do {

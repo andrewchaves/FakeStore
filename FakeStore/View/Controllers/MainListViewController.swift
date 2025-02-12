@@ -11,6 +11,7 @@ import Combine
 class MainListViewController: UIViewController {
     var tableView = UITableView()
     private var productVM = ProductVM()
+    private var categoryVM = CategorytVM()
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -24,6 +25,7 @@ class MainListViewController: UIViewController {
         
         bindViewModel()
         productVM.fetchProducts()
+        categoryVM.fetchCategories()
         setupNavigationBar()
         bluidScreen()
     }
@@ -31,15 +33,12 @@ class MainListViewController: UIViewController {
     //MARK: - Setup
     func setupNavigationBar() {
         let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"),
-                                           style: .plain,
-                                           target: self,
-                                           action: #selector(filterButtonTapped))
+                                           menu: nil)
         filterButton.tintColor = .black
         navigationItem.rightBarButtonItem = filterButton
     }
     
     func bluidScreen() {
-        
         self.view.backgroundColor = .white
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +53,19 @@ class MainListViewController: UIViewController {
             ])
     }
     
+    func createContextMenu() {
+        var children:[UIAction] = []
+        
+        categoryVM.categories.forEach({ category in
+            let action = UIAction(title: category.name) { _ in
+                self.filterButtonTapped(category: category.name)
+            }
+            children.append(action)
+        })
+    
+        navigationItem.rightBarButtonItem?.menu = UIMenu(title: "Select a category", children: children)
+    }
+    
     //MARK: - Bindings
     private func bindViewModel() {
         productVM.$products
@@ -62,11 +74,18 @@ class MainListViewController: UIViewController {
                 self?.tableView.reloadData()
             })
             .store(in: &cancellables)
+        
+        categoryVM.$categories
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.createContextMenu()
+            })
+            .store(in: &cancellables)
     }
     
     //MARK: - Actions
-    @objc private func filterButtonTapped() {
-        print("Open context Menu")
+    @objc private func filterButtonTapped(category: String) {
+        print("Category: \(category)")
     }
 }
 

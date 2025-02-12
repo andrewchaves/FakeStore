@@ -54,11 +54,24 @@ class MainListViewController: UIViewController {
     }
     
     func createContextMenu() {
+        
         var children:[UIAction] = []
+        
+        let showAllProductsAction = UIAction(title: "All products") { _ in
+            self.productVM.filterProducts(category: nil)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+        children.append(showAllProductsAction)
         
         categoryVM.categories.forEach({ category in
             let action = UIAction(title: category.name) { _ in
-                self.filterButtonTapped(category: category.name)
+                self.productVM.filterProducts(category: category.name)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
             children.append(action)
         })
@@ -71,7 +84,9 @@ class MainListViewController: UIViewController {
         productVM.$products
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
-                self?.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
             })
             .store(in: &cancellables)
         
@@ -82,18 +97,13 @@ class MainListViewController: UIViewController {
             })
             .store(in: &cancellables)
     }
-    
-    //MARK: - Actions
-    @objc private func filterButtonTapped(category: String) {
-        print("Category: \(category)")
-    }
 }
 
 // MARK: - Tableview methods
 extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        productVM.products.count
+        productVM.filteredProducts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,9 +111,9 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.fill(image: productVM.products[indexPath.row].image,
-                  title: productVM.products[indexPath.row].title,
-                  price: productVM.products[indexPath.row].price)
+        cell.fill(image: productVM.filteredProducts[indexPath.row].image,
+                  title: productVM.filteredProducts[indexPath.row].title,
+                  price: productVM.filteredProducts[indexPath.row].price)
         return cell
     }
 }

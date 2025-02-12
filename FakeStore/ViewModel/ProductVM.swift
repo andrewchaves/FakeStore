@@ -14,11 +14,13 @@ struct ProductForUI {
     var price: String
     var description: String
     var image: String
+    var category: String
 }
 
 class ProductVM {
     
     @Published var products: [ProductForUI] = []
+    @Published var filteredProducts: [ProductForUI] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
@@ -37,19 +39,40 @@ class ProductVM {
                             self?.errorMessage = APIError.networkError(error).localizedDescription
                         }
                     }, receiveValue: { [weak self] products in
+
                         self?.products = products.map { product in
                             ProductForUI(
                                 id: product.id,
                                 title: product.title,
                                 price: "$\(product.price)",
                                 description: product.description,
-                                image: product.image
+                                image: product.image,
+                                category: product.category
                             )
                         }
                     })
                     .store(in: &cancellables)
+                
+                DispatchQueue.main.async {
+                    self.filteredProducts = self.products
+                    self.isLoading = false
+                }
+                        
             } catch {
-                self.errorMessage = APIError.networkError(error).localizedDescription
+                DispatchQueue.main.async {
+                    self.errorMessage = APIError.networkError(error).localizedDescription
+                    self.isLoading = false
+                }
+            }
+        }
+    }
+    
+    func filterProducts(category: String?) {
+        DispatchQueue.main.async {
+            if let category = category {
+                self.filteredProducts = self.products.filter {$0.category == category}
+            } else {
+                self.filteredProducts = self.products
             }
         }
     }

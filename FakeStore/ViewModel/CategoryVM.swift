@@ -1,24 +1,16 @@
 //
-//  ProductVM.swift
+//  CategoryVM.swift
 //  FakeStore
 //
-//  Created by Andrew Vale on 30/01/25.
+//  Created by Andrew Vale on 12/02/25.
 //
 
 import Foundation
 import Combine
 
-struct ProductForUI {
-    var id: Int
-    var title: String
-    var price: String
-    var description: String
-    var image: String
-}
-
-class ProductVM {
+class CategorytVM {
     
-    @Published var products: [ProductForUI] = []
+    @Published var categories: [Category] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
@@ -29,21 +21,17 @@ class ProductVM {
         isLoading = true
         Task {
             do {
-                try await service.makeRequest(endPoint: .products, method: .GET, reponseType: [Product].self)
+                try await service.makeRequest(endPoint: .categories, method: .GET, reponseType: [String].self)
                     .receive(on: DispatchQueue.main)
                     .sink(receiveCompletion: { [weak self] completion in
                         self?.isLoading = false
                         if case let .failure(error) = completion {
                             self?.errorMessage = APIError.networkError(error).localizedDescription
                         }
-                    }, receiveValue: { [weak self] products in
-                        self?.products = products.map { product in
-                            ProductForUI(
-                                id: product.id,
-                                title: product.title,
-                                price: "$\(product.price)",
-                                description: product.description,
-                                image: product.image
+                    }, receiveValue: { [weak self] categories in
+                        self?.categories = categories.map {
+                            Category(
+                                name: $0
                             )
                         }
                     })

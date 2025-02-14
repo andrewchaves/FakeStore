@@ -118,7 +118,7 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let productDetailsVC = ProductDetailsViewController()
+        let productDetailsVC = ProductDetailsViewController(productToDisplay: productVM.filteredProducts[indexPath.row])
         productDetailsVC.navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.pushViewController(productDetailsVC, animated: true)
     }

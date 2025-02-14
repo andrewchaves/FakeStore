@@ -116,5 +116,9 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
                   price: productVM.filteredProducts[indexPath.row].price)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("clicked")
+    }
 }
 

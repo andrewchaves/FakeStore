@@ -16,6 +16,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
+        //Removing the name of the previous screen from back button and painting it black
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        
+        UINavigationBar.appearance().tintColor = .black
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        
         //Creating a root nav controller
         let mainListController = MainListViewController()
         let rootNavigationController = UINavigationController(rootViewController: mainListController)

@@ -21,6 +21,7 @@
 		876B05012D5CFBFC004F77C7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B05002D5CFBFC004F77C7 /* Category.swift */; };
 		876B05032D5CFE43004F77C7 /* CategoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B05022D5CFE43004F77C7 /* CategoryVM.swift */; };
 		876B05052D5EF711004F77C7 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B05042D5EF711004F77C7 /* ProductDetailsViewController.swift */; };
+		876B050F2D5FE0E0004F77C7 /* GeneralButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B050E2D5FE0E0004F77C7 /* GeneralButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		876B05002D5CFBFC004F77C7 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		876B05022D5CFE43004F77C7 /* CategoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVM.swift; sourceTree = "<group>"; };
 		876B05042D5EF711004F77C7 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
+		876B050E2D5FE0E0004F77C7 /* GeneralButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -184,7 +186,8 @@
 		876B04E62D499B21004F77C7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				876B04F92D540A75004F77C7 /* ProductTableViewCell.swift */,
+				876B050D2D5FE0B7004F77C7 /* Buttons */,
+				876B050C2D5FE0AA004F77C7 /* Cells */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -194,6 +197,22 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		876B050C2D5FE0AA004F77C7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				876B04F92D540A75004F77C7 /* ProductTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		876B050D2D5FE0B7004F77C7 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				876B050E2D5FE0E0004F77C7 /* GeneralButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				876B050F2D5FE0E0004F77C7 /* GeneralButton.swift in Sources */,
 				876B05032D5CFE43004F77C7 /* CategoryVM.swift in Sources */,
 				876B04D92D499AAB004F77C7 /* AppDelegate.swift in Sources */,
 				876B05052D5EF711004F77C7 /* ProductDetailsViewController.swift in Sources */,

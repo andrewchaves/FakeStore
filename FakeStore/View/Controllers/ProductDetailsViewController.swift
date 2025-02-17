@@ -13,6 +13,14 @@ class ProductDetailsViewController: UIViewController {
     
     var productToDisplay: ProductForUI
     
+    var cartButton: UIBarButtonItem = {
+        var barButtonItem = UIBarButtonItem()
+        barButtonItem.image = UIImage(systemName: "cart")
+        barButtonItem.menu = nil
+        barButtonItem.tintColor = .black
+        return barButtonItem
+    }()
+    
     var contentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -85,6 +93,7 @@ class ProductDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItems = [cartButton]
         productImageView.sd_setImage(with: URL(string: productToDisplay.image))
         productTitle.text = productToDisplay.title
         productPrice.text = productToDisplay.price

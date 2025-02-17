@@ -10,6 +10,23 @@ import Combine
 
 class MainListViewController: UIViewController {
     var tableView = UITableView()
+    
+    var filterButton: UIBarButtonItem = {
+        var barButtonItem = UIBarButtonItem()
+        barButtonItem.image = UIImage(systemName: "line.3.horizontal.decrease")
+        barButtonItem.menu = nil
+        barButtonItem.tintColor = .black
+        return barButtonItem
+    }()
+    
+    var cartButton: UIBarButtonItem = {
+        var barButtonItem = UIBarButtonItem()
+        barButtonItem.image = UIImage(systemName: "cart")
+        barButtonItem.menu = nil
+        barButtonItem.tintColor = .black
+        return barButtonItem
+    }()
+    
     private var productVM = ProductVM()
     private var categoryVM = CategorytVM()
     private var cancellables = Set<AnyCancellable>()
@@ -32,10 +49,7 @@ class MainListViewController: UIViewController {
     
     //MARK: - Setup
     func setupNavigationBar() {
-        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"),
-                                           menu: nil)
-        filterButton.tintColor = .black
-        navigationItem.rightBarButtonItem = filterButton
+        navigationItem.rightBarButtonItems = [filterButton, cartButton]
     }
     
     func bluidScreen() {
@@ -76,7 +90,7 @@ class MainListViewController: UIViewController {
             children.append(action)
         })
     
-        navigationItem.rightBarButtonItem?.menu = UIMenu(title: "Select a category", children: children)
+        navigationItem.rightBarButtonItems?[0].menu = UIMenu(title: "Select a category", children: children)
     }
     
     //MARK: - Bindings

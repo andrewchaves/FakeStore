@@ -26,6 +26,7 @@
 		876B05132D63D4A0004F77C7 /* CartItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B05112D63D4A0004F77C7 /* CartItem+CoreDataProperties.swift */; };
 		876B05142D63D4A0004F77C7 /* CartItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B05102D63D4A0004F77C7 /* CartItem+CoreDataClass.swift */; };
 		876B05152D63D4A0004F77C7 /* CartItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B05112D63D4A0004F77C7 /* CartItem+CoreDataProperties.swift */; };
+		876B051A2D63D5E1004F77C7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B05192D63D5E1004F77C7 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		876B050E2D5FE0E0004F77C7 /* GeneralButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralButton.swift; sourceTree = "<group>"; };
 		876B05102D63D4A0004F77C7 /* CartItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		876B05112D63D4A0004F77C7 /* CartItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		876B05192D63D5E1004F77C7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -157,8 +159,8 @@
 		876B04E22D499AC7004F77C7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				876B04ED2D4B1122004F77C7 /* Product.swift */,
-				876B05002D5CFBFC004F77C7 /* Category.swift */,
+				876B05182D63D5BB004F77C7 /* API */,
+				876B05172D63D5AB004F77C7 /* persistence */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -225,10 +227,27 @@
 		876B05162D63D4AD004F77C7 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				876B05192D63D5E1004F77C7 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		876B05172D63D5AB004F77C7 /* persistence */ = {
+			isa = PBXGroup;
+			children = (
 				876B05102D63D4A0004F77C7 /* CartItem+CoreDataClass.swift */,
 				876B05112D63D4A0004F77C7 /* CartItem+CoreDataProperties.swift */,
 			);
-			path = CoreData;
+			path = persistence;
+			sourceTree = "<group>";
+		};
+		876B05182D63D5BB004F77C7 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				876B04ED2D4B1122004F77C7 /* Product.swift */,
+				876B05002D5CFBFC004F77C7 /* Category.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +400,7 @@
 				876B050F2D5FE0E0004F77C7 /* GeneralButton.swift in Sources */,
 				876B05032D5CFE43004F77C7 /* CategoryVM.swift in Sources */,
 				876B04D92D499AAB004F77C7 /* AppDelegate.swift in Sources */,
+				876B051A2D63D5E1004F77C7 /* CoreDataManager.swift in Sources */,
 				876B05052D5EF711004F77C7 /* ProductDetailsViewController.swift in Sources */,
 				876B04FA2D540A75004F77C7 /* ProductTableViewCell.swift in Sources */,
 				876B04DA2D499AAB004F77C7 /* FakeStore.xcdatamodeld in Sources */,

@@ -32,4 +32,36 @@ class CartItemRepository {
             }
         }
     }
+    
+    func fetchCartItems() -> [CartItem]{
+        let context = coreDataManager.viewContext
+        let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
+        
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            //TODO: - Improve error handling
+            print(error)
+            return []
+        }
+    }
+    
+    func removeProduct(id: UUID) {
+        let context = coreDataManager.viewContext
+        let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let cartItems = try context.fetch(fetchRequest)
+            if let itemToRemove = cartItems.first {
+                context.delete(itemToRemove)
+                try context.save()
+            }
+        } catch {
+            print(error)
+            //TODO: - Improve error handling
+        }
+    }
+    
+    //TODO: - Add update item
 }

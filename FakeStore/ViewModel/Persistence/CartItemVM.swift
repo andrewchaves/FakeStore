@@ -20,9 +20,11 @@ class CartItemVM: ObservableObject {
     
     func fetchCartItems() {
         cartItems = cartItemRepository.fetchCartItems()
+        print(cartItems)
     }
     
-    func addProduct(_ product: Product) {
+    func addProduct(_ product: ProductForUI) {
+        let product = product.toProduct()
         cartItemRepository.addProduct(id: Int64(product.id),
                                       name: product.title,
                                       quantity:  1,

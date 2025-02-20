@@ -15,6 +15,16 @@ struct ProductForUI {
     var description: String
     var image: String
     var category: String
+    
+    func toProduct() -> Product{
+        
+        return Product(id: self.id,
+                       title: self.title,
+                       price: 0.0, //TODO: - Convert the real price
+                       description: self.description,
+                       image: self.image,
+                       category: self.category)
+    }
 }
 
 class ProductVM {

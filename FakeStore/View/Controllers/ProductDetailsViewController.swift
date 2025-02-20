@@ -12,6 +12,9 @@ import SDWebImage
 class ProductDetailsViewController: UIViewController {
     
     var productToDisplay: ProductForUI
+    var coreDataManager: CoreDataManager
+    var cartItemRepository: CartItemRepository
+    var cartItemVM: CartItemVM
     
     var cartButton: UIBarButtonItem = {
         var barButtonItem = UIBarButtonItem()
@@ -84,6 +87,9 @@ class ProductDetailsViewController: UIViewController {
     
     init (productToDisplay: ProductForUI) {
         self.productToDisplay = productToDisplay
+        coreDataManager = CoreDataManager(modelName: "FakeStore")
+        cartItemRepository  = CartItemRepository(coreDataManager: coreDataManager)
+        cartItemVM  = CartItemVM(cartItemRepository: cartItemRepository)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -99,6 +105,10 @@ class ProductDetailsViewController: UIViewController {
         productPrice.text = productToDisplay.price
         productDescription.text = productToDisplay.description
         bluidScreen()
+        
+        addToCartButton.addTarget(self,
+                         action: #selector(addProductToCart),
+                         for: .touchUpInside)
     }
     
     //MARK: - Setup
@@ -172,5 +182,11 @@ class ProductDetailsViewController: UIViewController {
              buyButton.widthAnchor.constraint(equalToConstant: halfScreenWidth),
              buyButton.heightAnchor.constraint(equalToConstant: 60)
             ])
+    }
+    
+    //MARK: - Actions
+    
+    @objc func addProductToCart() {
+        cartItemVM.addProduct(productToDisplay)
     }
 }

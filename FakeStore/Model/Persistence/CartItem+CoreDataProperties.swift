@@ -2,7 +2,7 @@
 //  CartItem+CoreDataProperties.swift
 //  FakeStore
 //
-//  Created by Andrew Vale on 17/02/25.
+//  Created by Andrew Vale on 20/02/25.
 //
 //
 
@@ -16,7 +16,7 @@ extension CartItem {
         return NSFetchRequest<CartItem>(entityName: "CartItem")
     }
 
-    @NSManaged public var id: UUID?
+    @NSManaged public var id: Int64
     @NSManaged public var name: String?
     @NSManaged public var price: Double
     @NSManaged public var quantity: Int16

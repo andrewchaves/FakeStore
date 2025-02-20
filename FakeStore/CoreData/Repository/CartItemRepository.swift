@@ -14,7 +14,7 @@ class CartItemRepository {
         self.coreDataManager = coreDataManager
     }
     
-    func addProduct(id: UUID, name: String, quantity: Int16, price: Double, image: String) {
+    func addProduct(id: Int64, name: String, quantity: Int16, price: Double, image: String) {
         let backgroundContext = coreDataManager.backgroundContext
         
         backgroundContext.perform {

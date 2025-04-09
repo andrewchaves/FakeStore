@@ -99,12 +99,9 @@ class ProductDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItems = [cartButton]
-        productImageView.sd_setImage(with: URL(string: productToDisplay.image))
-        productTitle.text = productToDisplay.title
-        productPrice.text = productToDisplay.price
-        productDescription.text = productToDisplay.description
+        setupNavigationBar()
         bluidScreen()
+        fillContent()
         
         addToCartButton.addTarget(self,
                          action: #selector(addProductToCart),
@@ -112,6 +109,12 @@ class ProductDetailsViewController: UIViewController {
     }
     
     //MARK: - Setup
+    
+    func setupNavigationBar() {
+        cartButton.target = self
+        cartButton.action = #selector(cartButtonTapped)
+        navigationItem.rightBarButtonItems = [cartButton]
+    }
 
     func bluidScreen() {
         let halfScreenWidth = self.view.frame.size.width/2
@@ -184,9 +187,22 @@ class ProductDetailsViewController: UIViewController {
             ])
     }
     
+    func fillContent() {
+        productImageView.sd_setImage(with: URL(string: productToDisplay.image))
+        productTitle.text = productToDisplay.title
+        productPrice.text = productToDisplay.price
+        productDescription.text = productToDisplay.description
+    }
+    
     //MARK: - Actions
     
     @objc func addProductToCart() {
         cartItemVM.addProduct(productToDisplay)
+    }
+    
+    @objc func cartButtonTapped() {
+        let carListVC = CartListViewController()
+        carListVC.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.pushViewController(carListVC, animated: true)
     }
 }

@@ -49,7 +49,10 @@ class MainListViewController: UIViewController {
     
     //MARK: - Setup
     func setupNavigationBar() {
+        cartButton.target = self
+        cartButton.action = #selector(cartButtonTapped)
         navigationItem.rightBarButtonItems = [filterButton, cartButton]
+        
     }
     
     func bluidScreen() {
@@ -91,6 +94,12 @@ class MainListViewController: UIViewController {
         })
     
         navigationItem.rightBarButtonItems?[0].menu = UIMenu(title: "Select a category", children: children)
+    }
+    //MARK: - Actions
+    @objc func cartButtonTapped() {
+        let carListVC = CartListViewController()
+        carListVC.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.pushViewController(carListVC, animated: true)
     }
     
     //MARK: - Bindings

@@ -97,9 +97,9 @@ class MainListViewController: UIViewController {
     }
     //MARK: - Actions
     @objc func cartButtonTapped() {
-        let carListVC = CartListViewController()
-        carListVC.navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.pushViewController(carListVC, animated: true)
+        let cartListVC = CartListViewController()
+        cartListVC.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.pushViewController(cartListVC, animated: true)
     }
     
     //MARK: - Bindings

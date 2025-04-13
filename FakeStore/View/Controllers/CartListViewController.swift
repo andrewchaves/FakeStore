@@ -71,6 +71,7 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
+        //TODO: - refactor to pass CartItem
         cell.fill(image: cartItemVM.cartItems[indexPath.row].image ?? "",
                   title: cartItemVM.cartItems[indexPath.row].name ?? "",
                   price: String(cartItemVM.cartItems[indexPath.row].price))

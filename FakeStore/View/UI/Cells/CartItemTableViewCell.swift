@@ -38,6 +38,7 @@ class CartItemTableViewCell: ProductTableViewCell {
     //MARK: - Cell Configuration
     override func setupView() {
         super.setupView()
+//        quantityDown.addTarget(self, action: #selector(), for: .touchUpInside)
         quantityDown.translatesAutoresizingMaskIntoConstraints = false
         quantityUP.translatesAutoresizingMaskIntoConstraints = false
 
@@ -63,5 +64,10 @@ class CartItemTableViewCell: ProductTableViewCell {
               title: String,
               price: String) {
         super.fill(image: image, title: title, price: price)
+    }
+    
+    //MARK: - Actions
+    @objc func quantityGoesUp() {
+
     }
 }

@@ -46,16 +46,16 @@ class CartItemTableViewCell: ProductTableViewCell {
 
         NSLayoutConstraint.activate([
             //Up Button
-            quantityUP.widthAnchor.constraint(equalToConstant: 12.0),
-            quantityUP.heightAnchor.constraint(equalToConstant: 12.0),
-            quantityUP.trailingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: -8.0),
+            quantityUP.widthAnchor.constraint(equalToConstant: 20.0),
+            quantityUP.heightAnchor.constraint(equalToConstant: 20.0),
+            quantityUP.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8.0),
             quantityUP.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
             
             //Down Button
-            quantityUP.widthAnchor.constraint(equalToConstant: 12.0),
-            quantityUP.heightAnchor.constraint(equalToConstant: 12.0),
-            quantityUP.trailingAnchor.constraint(equalTo: self.quantityUP.leadingAnchor, constant: -8.0),
-            quantityUP.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
+            quantityDown.widthAnchor.constraint(equalToConstant: 20.0),
+            quantityDown.heightAnchor.constraint(equalToConstant: 20.0),
+            quantityDown.trailingAnchor.constraint(equalTo: self.quantityUP.leadingAnchor, constant: -8.0),
+            quantityDown.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
         ])
     }
     

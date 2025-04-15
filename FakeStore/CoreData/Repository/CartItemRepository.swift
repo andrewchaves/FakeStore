@@ -63,5 +63,21 @@ class CartItemRepository {
         }
     }
     
-    //TODO: - Add update item
+    func updateQuantity(for id:UUID, to newQuantity: Int) {
+        let context = coreDataManager.viewContext
+        let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let items = try context.fetch(fetchRequest)
+            if let itemToBeUpdated = items.first {
+                itemToBeUpdated.quantity = Int16(newQuantity)
+                try context.save()
+            } else {
+                print("ID not found!")
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+    }
 }

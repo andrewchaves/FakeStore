@@ -37,4 +37,9 @@ class CartItemVM: ObservableObject {
         cartItemRepository.removeProduct(id: id)
         fetchCartItems()
     }
+    
+    func updateCartItemQuantity(for id: UUID, newQuantity: Int) {
+        cartItemRepository.updateQuantity(for: id, to: newQuantity)
+        fetchCartItems()
+    }
 }

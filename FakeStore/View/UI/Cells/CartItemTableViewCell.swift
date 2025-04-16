@@ -15,6 +15,14 @@ class CartItemTableViewCell: ProductTableViewCell {
     var cartItemVM: CartItemVM
     
     var cartItemID: Int64?
+    var cartItemQuantity: Int = 1 {
+        didSet {
+            if cartItemQuantity < 1 {
+                cartItemQuantity = 1
+            }
+            productQuantity.text = "\(cartItemQuantity)"
+        }
+    }
     
     var quantityDownButton: GeneralButton = {
         var button = GeneralButton(title: "-",
@@ -38,7 +46,7 @@ class CartItemTableViewCell: ProductTableViewCell {
         label.textColor = .lightGray
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "0"
+        label.text = "1"
         return label
     }()
     
@@ -63,11 +71,11 @@ class CartItemTableViewCell: ProductTableViewCell {
         quantityUPButton.translatesAutoresizingMaskIntoConstraints = false
         
         productQuantity.translatesAutoresizingMaskIntoConstraints = false
-
+        
         self.contentView.addSubview(quantityDownButton)
         self.contentView.addSubview(quantityUPButton)
         self.contentView.addSubview(productQuantity)
-
+        
         NSLayoutConstraint.activate([
             //Up Button
             quantityUPButton.widthAnchor.constraint(equalToConstant: 20.0),
@@ -98,16 +106,16 @@ class CartItemTableViewCell: ProductTableViewCell {
     
     //MARK: - Actions
     @objc func quantityGoesUp() {
-        //TODO: - Mock logic just to test it.
+        cartItemQuantity = cartItemQuantity + 1
         if let id = cartItemID {
-            cartItemVM.updateCartItemQuantity(for: id, newQuantity: Int.random(in: 0...10))
+            cartItemVM.updateCartItemQuantity(for: id, newQuantity: cartItemQuantity)
         }
     }
     
     @objc func quantityGoesDown() {
-        //TODO: - Mock logic just to test it.
+        cartItemQuantity = cartItemQuantity - 1
         if let id = cartItemID {
-            cartItemVM.updateCartItemQuantity(for: id, newQuantity: Int.random(in: 0...10))
+            cartItemVM.updateCartItemQuantity(for: id, newQuantity: cartItemQuantity)
         }
     }
 }

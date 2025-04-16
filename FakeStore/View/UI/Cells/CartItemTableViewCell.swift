@@ -97,11 +97,13 @@ class CartItemTableViewCell: ProductTableViewCell {
         ])
     }
     
-    func fill(id: Int64, image:String,
-              title: String,
-              price: String) {
-        super.fill(image: image, title: title, price: price)
-        self.cartItemID = id
+    
+    func fill(cartItem: CartItem) {
+        super.fill(image: cartItem.image ?? "",
+                   title: cartItem.name ?? "",
+                   price: String(cartItem.price))
+        self.cartItemID = cartItem.id
+        self.cartItemQuantity = Int(cartItem.quantity)
     }
     
     //MARK: - Actions

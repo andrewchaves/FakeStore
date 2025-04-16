@@ -32,6 +32,16 @@ class CartItemTableViewCell: ProductTableViewCell {
         return button
     }()
     
+    var productQuantity: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18.0, weight: .light)
+        label.textColor = .lightGray
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.text = "0"
+        return label
+    }()
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -51,9 +61,12 @@ class CartItemTableViewCell: ProductTableViewCell {
         quantityUPButton.addTarget(self, action: #selector(quantityGoesUp), for: .touchUpInside)
         quantityDownButton.translatesAutoresizingMaskIntoConstraints = false
         quantityUPButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        productQuantity.translatesAutoresizingMaskIntoConstraints = false
 
         self.contentView.addSubview(quantityDownButton)
         self.contentView.addSubview(quantityUPButton)
+        self.contentView.addSubview(productQuantity)
 
         NSLayoutConstraint.activate([
             //Up Button
@@ -62,10 +75,16 @@ class CartItemTableViewCell: ProductTableViewCell {
             quantityUPButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8.0),
             quantityUPButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
             
+            //Quantity
+            productQuantity.widthAnchor.constraint(equalToConstant: 20.0),
+            productQuantity.heightAnchor.constraint(equalToConstant: 20.0),
+            productQuantity.trailingAnchor.constraint(equalTo: self.quantityUPButton.leadingAnchor, constant: -8.0),
+            productQuantity.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
+            
             //Down Button
             quantityDownButton.widthAnchor.constraint(equalToConstant: 20.0),
             quantityDownButton.heightAnchor.constraint(equalToConstant: 20.0),
-            quantityDownButton.trailingAnchor.constraint(equalTo: self.quantityUPButton.leadingAnchor, constant: -8.0),
+            quantityDownButton.trailingAnchor.constraint(equalTo: self.productQuantity.leadingAnchor, constant: -8.0),
             quantityDownButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
         ])
     }

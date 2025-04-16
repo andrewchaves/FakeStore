@@ -63,10 +63,10 @@ class CartItemRepository {
         }
     }
     
-    func updateQuantity(for id:UUID, to newQuantity: Int) {
+    func updateQuantity(for id:Int64, to newQuantity: Int) {
         let context = coreDataManager.viewContext
         let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "id == %lld", id as CVarArg)
         
         do {
             let items = try context.fetch(fetchRequest)

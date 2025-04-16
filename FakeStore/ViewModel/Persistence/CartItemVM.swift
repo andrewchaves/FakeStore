@@ -38,7 +38,7 @@ class CartItemVM: ObservableObject {
         fetchCartItems()
     }
     
-    func updateCartItemQuantity(for id: UUID, newQuantity: Int) {
+    func updateCartItemQuantity(for id: Int64, newQuantity: Int) {
         cartItemRepository.updateQuantity(for: id, to: newQuantity)
         fetchCartItems()
     }

@@ -10,7 +10,13 @@ import UIKit
 
 class CartItemTableViewCell: ProductTableViewCell {
     
-    var quantityDown: GeneralButton = {
+    var coreDataManager: CoreDataManager
+    var cartItemRepository: CartItemRepository
+    var cartItemVM: CartItemVM
+    
+    var cartItemID: Int64?
+    
+    var quantityDownButton: GeneralButton = {
         var button = GeneralButton(title: "-",
                                    titleBold: true,
                                    titleTextColor: .white,
@@ -18,7 +24,7 @@ class CartItemTableViewCell: ProductTableViewCell {
         return button
     }()
     
-    var quantityUP: GeneralButton = {
+    var quantityUPButton: GeneralButton = {
         var button = GeneralButton(title: "+",
                                    titleBold: true,
                                    titleTextColor: .white,
@@ -31,6 +37,9 @@ class CartItemTableViewCell: ProductTableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        coreDataManager = CoreDataManager(modelName: "FakeStore")
+        cartItemRepository  = CartItemRepository(coreDataManager: coreDataManager)
+        cartItemVM  = CartItemVM(cartItemRepository: cartItemRepository)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
     }
@@ -38,36 +47,48 @@ class CartItemTableViewCell: ProductTableViewCell {
     //MARK: - Cell Configuration
     override func setupView() {
         super.setupView()
-//        quantityDown.addTarget(self, action: #selector(), for: .touchUpInside)
-        quantityDown.translatesAutoresizingMaskIntoConstraints = false
-        quantityUP.translatesAutoresizingMaskIntoConstraints = false
+        quantityDownButton.addTarget(self, action: #selector(quantityGoesDown), for: .touchUpInside)
+        quantityUPButton.addTarget(self, action: #selector(quantityGoesUp), for: .touchUpInside)
+        quantityDownButton.translatesAutoresizingMaskIntoConstraints = false
+        quantityUPButton.translatesAutoresizingMaskIntoConstraints = false
 
-        self.contentView.addSubview(quantityDown)
-        self.contentView.addSubview(quantityUP)
+        self.contentView.addSubview(quantityDownButton)
+        self.contentView.addSubview(quantityUPButton)
 
         NSLayoutConstraint.activate([
             //Up Button
-            quantityUP.widthAnchor.constraint(equalToConstant: 20.0),
-            quantityUP.heightAnchor.constraint(equalToConstant: 20.0),
-            quantityUP.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8.0),
-            quantityUP.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
+            quantityUPButton.widthAnchor.constraint(equalToConstant: 20.0),
+            quantityUPButton.heightAnchor.constraint(equalToConstant: 20.0),
+            quantityUPButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8.0),
+            quantityUPButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
             
             //Down Button
-            quantityDown.widthAnchor.constraint(equalToConstant: 20.0),
-            quantityDown.heightAnchor.constraint(equalToConstant: 20.0),
-            quantityDown.trailingAnchor.constraint(equalTo: self.quantityUP.leadingAnchor, constant: -8.0),
-            quantityDown.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
+            quantityDownButton.widthAnchor.constraint(equalToConstant: 20.0),
+            quantityDownButton.heightAnchor.constraint(equalToConstant: 20.0),
+            quantityDownButton.trailingAnchor.constraint(equalTo: self.quantityUPButton.leadingAnchor, constant: -8.0),
+            quantityDownButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0),
         ])
     }
     
-    override func fill(image:String,
+    func fill(id: Int64, image:String,
               title: String,
               price: String) {
         super.fill(image: image, title: title, price: price)
+        self.cartItemID = id
     }
     
     //MARK: - Actions
     @objc func quantityGoesUp() {
-
+        //TODO: - Mock logic just to test it.
+        if let id = cartItemID {
+            cartItemVM.updateCartItemQuantity(for: id, newQuantity: Int.random(in: 0...10))
+        }
+    }
+    
+    @objc func quantityGoesDown() {
+        //TODO: - Mock logic just to test it.
+        if let id = cartItemID {
+            cartItemVM.updateCartItemQuantity(for: id, newQuantity: Int.random(in: 0...10))
+        }
     }
 }

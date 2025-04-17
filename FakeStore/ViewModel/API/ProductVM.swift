@@ -18,9 +18,17 @@ struct ProductForUI {
     
     func toProduct() -> Product{
         
+        var convertedPrice: Double
+        let priceNumberInString = self.price.replacingOccurrences(of: "$", with: "")
+        if let priceDouble = Double(priceNumberInString) {
+            convertedPrice = priceDouble
+        } else {
+            convertedPrice = 0.0
+        }
+        
         return Product(id: self.id,
                        title: self.title,
-                       price: 0.0, //TODO: - Convert the real price
+                       price: convertedPrice,
                        description: self.description,
                        image: self.image,
                        category: self.category)

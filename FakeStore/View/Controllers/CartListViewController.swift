@@ -14,6 +14,14 @@ class CartListViewController: UIViewController {
     var cartItemRepository: CartItemRepository
     var cartItemVM: CartItemVM
     
+    var finishBuyingButton: GeneralButton = {
+        var button = GeneralButton(title: "Finish Buying",
+                                   titleBold: true,
+                                   titleTextColor: .white,
+                                   backgroundColor: .orange)
+        return button
+    }()
+    
     init () {
         coreDataManager = CoreDataManager(modelName: "FakeStore")
         cartItemRepository  = CartItemRepository(coreDataManager: coreDataManager)
@@ -42,15 +50,25 @@ class CartListViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.view.addSubview(tableView)
+        self.view.addSubview(finishBuyingButton)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 160
+        
+        finishBuyingButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo:self.view.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo:self.finishBuyingButton.topAnchor, constant: -8.0),
+            
+
+            finishBuyingButton.heightAnchor.constraint(equalToConstant: 60.0),
+            finishBuyingButton.leadingAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
+            finishBuyingButton.trailingAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
+            finishBuyingButton.bottomAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
     

@@ -71,6 +71,7 @@ class CartItemRepository {
         do {
             let items = try context.fetch(fetchRequest)
             if let itemToBeUpdated = items.first {
+                itemToBeUpdated.price = ( itemToBeUpdated.price / Double(itemToBeUpdated.quantity) )  * Double(newQuantity)
                 itemToBeUpdated.quantity = Int16(newQuantity)
                 try context.save()
             } else {

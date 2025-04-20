@@ -6,9 +6,12 @@
 //
 
 import UIKit
-
+import Combine
 
 class CartListViewController: UIViewController {
+    
+    private var cancellables = Set<AnyCancellable>()
+    
     var tableView = UITableView()
     var coreDataManager: CoreDataManager
     var cartItemRepository: CartItemRepository
@@ -43,6 +46,16 @@ class CartListViewController: UIViewController {
         tableView.register(CartItemTableViewCell.self, forCellReuseIdentifier: "cell")
         
         setupView()
+        observeCartItems()
+    }
+    
+    func observeCartItems() {
+        cartItemVM.$cartItems
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }
+            .store(in: &cancellables)
         fetchItems()
     }
     
@@ -92,6 +105,4 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.fill(cartItem: cartItemVM.cartItems[indexPath.row])
         return cell
     }
-    
-    
 }

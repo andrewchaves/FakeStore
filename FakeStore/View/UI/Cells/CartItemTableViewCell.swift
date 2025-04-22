@@ -96,7 +96,7 @@ class CartItemTableViewCell: ProductTableViewCell {
     func fill(cartItem: CartItem) {
         super.fill(image: cartItem.image ?? "",
                    title: cartItem.name ?? "",
-                   price: String(cartItem.price))
+                   price: String(format: "%.2f", cartItem.price))
         self.cartItemID = cartItem.id
         self.cartItemQuantity = Int(cartItem.quantity)
     }

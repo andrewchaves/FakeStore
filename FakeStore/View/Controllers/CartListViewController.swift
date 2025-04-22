@@ -56,7 +56,6 @@ class CartListViewController: UIViewController {
                 self?.tableView.reloadData()
             }
             .store(in: &cancellables)
-        fetchItems()
     }
     
     func setupView() {
@@ -103,6 +102,9 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.fill(cartItem: cartItemVM.cartItems[indexPath.row])
+        cell.onQuantityChange = { [weak self] id, newQuantity in
+            self?.cartItemVM.updateCartItemQuantity(for: id, newQuantity: newQuantity)
+        }
         return cell
     }
 }

@@ -10,9 +10,7 @@ import UIKit
 
 class CartItemTableViewCell: ProductTableViewCell {
     
-    var coreDataManager: CoreDataManager
-    var cartItemRepository: CartItemRepository
-    var cartItemVM: CartItemVM
+    var onQuantityChange: ((Int64, Int) -> Void)?
     
     var cartItemID: Int64?
     var cartItemQuantity: Int = 1 {
@@ -55,9 +53,6 @@ class CartItemTableViewCell: ProductTableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        coreDataManager = CoreDataManager(modelName: "FakeStore")
-        cartItemRepository  = CartItemRepository(coreDataManager: coreDataManager)
-        cartItemVM  = CartItemVM(cartItemRepository: cartItemRepository)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
     }
@@ -110,14 +105,14 @@ class CartItemTableViewCell: ProductTableViewCell {
     @objc func quantityGoesUp() {
         cartItemQuantity = cartItemQuantity + 1
         if let id = cartItemID {
-            cartItemVM.updateCartItemQuantity(for: id, newQuantity: cartItemQuantity)
+            onQuantityChange?(id, cartItemQuantity)
         }
     }
     
     @objc func quantityGoesDown() {
         cartItemQuantity = cartItemQuantity - 1
         if let id = cartItemID {
-            cartItemVM.updateCartItemQuantity(for: id, newQuantity: cartItemQuantity)
+            onQuantityChange?(id, cartItemQuantity)
         }
     }
 }

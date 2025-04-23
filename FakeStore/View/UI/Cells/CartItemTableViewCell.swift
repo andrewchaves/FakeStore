@@ -26,7 +26,7 @@ class CartItemTableViewCell: ProductTableViewCell {
         var button = GeneralButton(title: "-",
                                    titleBold: true,
                                    titleTextColor: .white,
-                                   backgroundColor: .blue)
+                                   backgroundColor: .buttonBlue)
         return button
     }()
     
@@ -34,7 +34,7 @@ class CartItemTableViewCell: ProductTableViewCell {
         var button = GeneralButton(title: "+",
                                    titleBold: true,
                                    titleTextColor: .white,
-                                   backgroundColor: .blue)
+                                   backgroundColor: .buttonBlue)
         return button
     }()
     

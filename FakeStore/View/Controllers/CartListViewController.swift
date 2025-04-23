@@ -28,6 +28,7 @@ class CartListViewController: UIViewController {
     var summaryView: UIView = {
         var view = UIView()
         view.backgroundColor = .viewBlue
+        view.layer.cornerRadius = 10.0
         return view
     }()
     
@@ -86,9 +87,9 @@ class CartListViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo:self.summaryView.topAnchor, constant: -8.0),
             
             summaryView.heightAnchor.constraint(equalToConstant: 120.0),
-            summaryView.leadingAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.leadingAnchor, constant: 8.0),
-            summaryView.trailingAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.trailingAnchor, constant: -8.0),
-            summaryView.bottomAnchor.constraint(equalTo:self.finishBuyingButton.topAnchor, constant: -8.0),
+            summaryView.leadingAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
+            summaryView.trailingAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
+            summaryView.bottomAnchor.constraint(equalTo:self.finishBuyingButton.topAnchor, constant: -24.0),
             
             finishBuyingButton.heightAnchor.constraint(equalToConstant: 60.0),
             finishBuyingButton.leadingAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16.0),

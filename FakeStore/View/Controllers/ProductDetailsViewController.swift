@@ -73,7 +73,7 @@ class ProductDetailsViewController: UIViewController {
         var button = GeneralButton(title: "Add to Cart",
                                    titleBold: true,
                                    titleTextColor: .white,
-                                   backgroundColor: .green)
+                                   backgroundColor: .buttonGreen)
         return button
     }()
     
@@ -81,7 +81,7 @@ class ProductDetailsViewController: UIViewController {
         var button = GeneralButton(title: "Buy it",
                                    titleBold: true,
                                    titleTextColor: .white,
-                                   backgroundColor: .blue)
+                                   backgroundColor: .buttonBlue)
         return button
     }()
     

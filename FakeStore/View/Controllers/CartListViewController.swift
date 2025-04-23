@@ -21,13 +21,13 @@ class CartListViewController: UIViewController {
         var button = GeneralButton(title: "Finish Buying",
                                    titleBold: true,
                                    titleTextColor: .white,
-                                   backgroundColor: .orange)
+                                   backgroundColor: .buttonOrange)
         return button
     }()
     
     var summaryView: UIView = {
         var view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .viewBlue
         return view
     }()
     

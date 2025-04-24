@@ -18,9 +18,9 @@ protocol CartItemViewModelProtocol: ObservableObject {
 class CartItemVM: CartItemViewModelProtocol {
     @Published var cartItems: [CartItem] = []
     
-    private let cartItemRepository: CartItemProtocol
+    private let cartItemRepository: any CartItemRepositoryProtocol
     
-    init (cartItemRepository: CartItemRepository) {
+    init (cartItemRepository: CartItemRepositoryProtocol) {
         self.cartItemRepository = cartItemRepository
         fetchCartItems()
     }

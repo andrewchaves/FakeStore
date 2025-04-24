@@ -14,7 +14,7 @@ class ProductDetailsViewController: UIViewController {
     var productToDisplay: ProductForUI
     var coreDataManager: CoreDataManager
     var cartItemRepository: CartItemRepository
-    var cartItemVM: CartItemVM
+    var cartItemViewModel: any CartItemViewModelProtocol
     
     var cartButton: UIBarButtonItem = {
         var barButtonItem = UIBarButtonItem()
@@ -85,11 +85,12 @@ class ProductDetailsViewController: UIViewController {
         return button
     }()
     
-    init (productToDisplay: ProductForUI) {
+    init (productToDisplay: ProductForUI,
+          cartItemViewModel: any CartItemViewModelProtocol = AppContainer.shared.cartItemViewModel) {
         self.productToDisplay = productToDisplay
         coreDataManager = CoreDataManager(modelName: "FakeStore")
         cartItemRepository  = CartItemRepository(coreDataManager: coreDataManager)
-        cartItemVM  = CartItemVM(cartItemRepository: cartItemRepository)
+        self.cartItemViewModel  = cartItemViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -197,7 +198,7 @@ class ProductDetailsViewController: UIViewController {
     //MARK: - Actions
     
     @objc func addProductToCart() {
-        cartItemVM.addProduct(productToDisplay)
+        cartItemViewModel.addProduct(productToDisplay)
     }
     
     @objc func cartButtonTapped() {

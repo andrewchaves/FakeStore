@@ -7,7 +7,14 @@
 
 import CoreData
 
-class CartItemRepository {
+protocol CartItemProtocol {
+    func addProduct(id: Int64, name: String, quantity: Int16, price: Double, image: String)
+    func fetchCartItems() -> [CartItem]
+    func removeProduct(id: UUID)
+    func updateQuantity(for id:Int64, to newQuantity: Int)
+}
+
+class CartItemRepository: CartItemProtocol {
     private let coreDataManager: CoreDataManager
     
     init(coreDataManager: CoreDataManager) {

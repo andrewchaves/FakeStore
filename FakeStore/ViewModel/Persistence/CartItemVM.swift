@@ -8,10 +8,17 @@
 import Foundation
 import Combine
 
-class CartItemVM: ObservableObject {
+protocol CartItemViewModelProtocol: ObservableObject {
+    var cartItems: [CartItem] { get }
+    func addProduct(_ product: ProductForUI)
+    func removeCartItem(id: UUID)
+    func updateCartItemQuantity(for id: Int64, newQuantity: Int)
+}
+
+class CartItemVM: CartItemViewModelProtocol {
     @Published var cartItems: [CartItem] = []
     
-    private let cartItemRepository: CartItemRepository
+    private let cartItemRepository: CartItemProtocol
     
     init (cartItemRepository: CartItemRepository) {
         self.cartItemRepository = cartItemRepository

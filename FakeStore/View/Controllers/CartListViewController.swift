@@ -13,9 +13,7 @@ class CartListViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     var tableView = UITableView()
-    var coreDataManager: CoreDataManager
-    var cartItemRepository: CartItemRepository
-    var cartItemVM: CartItemVM
+    var cartItemViewModel: any CartItemViewModelProtocol
     
     var finishBuyingButton: GeneralButton = {
         var button = GeneralButton(title: "Finish Buying",
@@ -32,10 +30,8 @@ class CartListViewController: UIViewController {
         return view
     }()
     
-    init () {
-        coreDataManager = CoreDataManager(modelName: "FakeStore")
-        cartItemRepository  = CartItemRepository(coreDataManager: coreDataManager)
-        cartItemVM  = CartItemVM(cartItemRepository: cartItemRepository)
+    init (cartItemViewModel: any CartItemViewModelProtocol = AppContainer.shared.cartItemViewModel) {
+        self.cartItemViewModel  = cartItemViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -57,7 +53,7 @@ class CartListViewController: UIViewController {
     }
     
     func observeCartItems() {
-        cartItemVM.$cartItems
+        cartItemViewModel.cartItemsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
@@ -99,7 +95,7 @@ class CartListViewController: UIViewController {
     }
     
     func fetchItems() {
-        cartItemVM.fetchCartItems()
+        cartItemViewModel.fetchCartItems()
     }
 }
 
@@ -107,7 +103,7 @@ class CartListViewController: UIViewController {
 extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cartItemVM.cartItems.count
+        return cartItemViewModel.cartItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,9 +111,9 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.fill(cartItem: cartItemVM.cartItems[indexPath.row])
+        cell.fill(cartItem: cartItemViewModel.cartItems[indexPath.row])
         cell.onQuantityChange = { [weak self] id, newQuantity in
-            self?.cartItemVM.updateCartItemQuantity(for: id, newQuantity: newQuantity)
+            self?.cartItemViewModel.updateCartItemQuantity(for: id, newQuantity: newQuantity)
         }
         return cell
     }

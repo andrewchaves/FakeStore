@@ -10,13 +10,19 @@ import Combine
 
 protocol CartItemViewModelProtocol: ObservableObject {
     var cartItems: [CartItem] { get }
+    var cartItemsPublisher: Published<[CartItem]>.Publisher { get }
+    func fetchCartItems()
     func addProduct(_ product: ProductForUI)
     func removeCartItem(id: UUID)
     func updateCartItemQuantity(for id: Int64, newQuantity: Int)
 }
 
 class CartItemVM: CartItemViewModelProtocol {
+    
     @Published var cartItems: [CartItem] = []
+    var cartItemsPublisher: Published<[CartItem]>.Publisher {
+        $cartItems
+    }
     
     private let cartItemRepository: any CartItemRepositoryProtocol
     

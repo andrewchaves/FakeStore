@@ -8,19 +8,16 @@
 import Foundation
 import UIKit
 
+protocol CartItemTableViewCellDelegate: AnyObject {
+    func upButtonTapped(_ cell: CartItemTableViewCell, id: Int64)
+    func downButtonTapped(_ cell: CartItemTableViewCell, id: Int64)
+}
+
 class CartItemTableViewCell: ProductTableViewCell {
     
-    var onQuantityChange: ((Int64, Int) -> Void)?
+    weak var delegate: CartItemTableViewCellDelegate?
     
     var cartItemID: Int64?
-    var cartItemQuantity: Int = 1 {
-        didSet {
-            if cartItemQuantity < 1 {
-                cartItemQuantity = 1
-            }
-            productQuantity.text = "\(cartItemQuantity)"
-        }
-    }
     
     var quantityDownButton: GeneralButton = {
         var button = GeneralButton(title: "-",
@@ -92,27 +89,24 @@ class CartItemTableViewCell: ProductTableViewCell {
         ])
     }
     
-    
     func fill(cartItem: CartItem) {
         super.fill(image: cartItem.image ?? "",
                    title: cartItem.name ?? "",
                    price: String(format: "%.2f", cartItem.price))
         self.cartItemID = cartItem.id
-        self.cartItemQuantity = Int(cartItem.quantity)
+        self.productQuantity.text = "\(cartItem.quantity)"
     }
     
     //MARK: - Actions
     @objc func quantityGoesUp() {
-        cartItemQuantity = cartItemQuantity + 1
         if let id = cartItemID {
-            onQuantityChange?(id, cartItemQuantity)
+            delegate?.upButtonTapped(self, id: id)
         }
     }
     
     @objc func quantityGoesDown() {
-        cartItemQuantity = cartItemQuantity - 1
         if let id = cartItemID {
-            onQuantityChange?(id, cartItemQuantity)
+            delegate?.downButtonTapped(self, id: id)
         }
     }
 }

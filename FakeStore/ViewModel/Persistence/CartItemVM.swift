@@ -14,7 +14,8 @@ protocol CartItemViewModelProtocol: ObservableObject {
     func fetchCartItems()
     func addProduct(_ product: ProductForUI)
     func removeCartItem(id: UUID)
-    func updateCartItemQuantity(for id: Int64, newQuantity: Int)
+    func increaseCartItemQuantity(for id: Int64)
+    func decreaseCartItemQuantity(for id: Int64)
 }
 
 class CartItemVM: CartItemViewModelProtocol {
@@ -50,8 +51,13 @@ class CartItemVM: CartItemViewModelProtocol {
         fetchCartItems()
     }
     
-    func updateCartItemQuantity(for id: Int64, newQuantity: Int) {
-        cartItemRepository.updateQuantity(for: id, to: newQuantity)
+    func increaseCartItemQuantity(for id: Int64) {
+        cartItemRepository.updateQuantity(for: id, isUp: true)
+        fetchCartItems()
+    }
+    
+    func decreaseCartItemQuantity(for id: Int64) {
+        cartItemRepository.updateQuantity(for: id, isUp: false)
         fetchCartItems()
     }
 }

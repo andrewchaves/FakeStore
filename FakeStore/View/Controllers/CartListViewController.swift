@@ -99,7 +99,7 @@ class CartListViewController: UIViewController {
     }
 }
 
-//MARK: - Tableview Methods
+//MARK: - TableView Methods
 extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,9 +112,21 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.fill(cartItem: cartItemViewModel.cartItems[indexPath.row])
-        cell.onQuantityChange = { [weak self] id, newQuantity in
-            self?.cartItemViewModel.updateCartItemQuantity(for: id, newQuantity: newQuantity)
-        }
+        cell.delegate = self
+//        cell.onQuantityChange = { [weak self] id, newQuantity in
+//            self?.cartItemViewModel.updateCartItemQuantity(for: id, newQuantity: newQuantity)
+//        }
         return cell
+    }
+}
+
+//MARK: - TableViewCell Methods
+extension CartListViewController: CartItemTableViewCellDelegate {
+    func upButtonTapped(_ cell: CartItemTableViewCell, id: Int64) {
+        self.cartItemViewModel.increaseCartItemQuantity(for: id)
+    }
+    
+    func downButtonTapped(_ cell: CartItemTableViewCell, id: Int64) {
+        self.cartItemViewModel.decreaseCartItemQuantity(for: id)
     }
 }

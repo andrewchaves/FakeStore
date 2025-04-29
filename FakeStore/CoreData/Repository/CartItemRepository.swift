@@ -11,7 +11,7 @@ protocol CartItemRepositoryProtocol {
     func addProduct(id: Int64, name: String, quantity: Int16, price: Double, image: String)
     func fetchCartItems() -> [CartItem]
     func removeProduct(id: UUID)
-    func updateQuantity(for id:Int64, to newQuantity: Int)
+    func updateQuantity(for id:Int64, isUp: Bool) 
 }
 
 class CartItemRepository: CartItemRepositoryProtocol {
@@ -70,7 +70,7 @@ class CartItemRepository: CartItemRepositoryProtocol {
         }
     }
     
-    func updateQuantity(for id:Int64, to newQuantity: Int) {
+    func updateQuantity(for id:Int64, isUp: Bool) {
         let context = coreDataManager.viewContext
         let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %lld", id as CVarArg)
@@ -78,8 +78,13 @@ class CartItemRepository: CartItemRepositoryProtocol {
         do {
             let items = try context.fetch(fetchRequest)
             if let itemToBeUpdated = items.first {
-                itemToBeUpdated.price = ( itemToBeUpdated.price / Double(itemToBeUpdated.quantity) )  * Double(newQuantity)
-                itemToBeUpdated.quantity = Int16(newQuantity)
+                if (isUp){
+                    itemToBeUpdated.price = (itemToBeUpdated.price / Double(itemToBeUpdated.quantity))  * Double(itemToBeUpdated.quantity + 1)
+                    itemToBeUpdated.quantity = itemToBeUpdated.quantity + 1
+                } else if (itemToBeUpdated.quantity > 1) {
+                    itemToBeUpdated.price = (itemToBeUpdated.price / Double(itemToBeUpdated.quantity))  * Double(itemToBeUpdated.quantity - 1)
+                    itemToBeUpdated.quantity = itemToBeUpdated.quantity - 1
+                }
                 try context.save()
             } else {
                 print("ID not found!")

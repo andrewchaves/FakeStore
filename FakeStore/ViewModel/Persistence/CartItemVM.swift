@@ -16,6 +16,7 @@ protocol CartItemViewModelProtocol: ObservableObject {
     func removeCartItem(id: UUID)
     func increaseCartItemQuantity(for id: Int64)
     func decreaseCartItemQuantity(for id: Int64)
+    func getPriceSum() -> Double
 }
 
 class CartItemVM: CartItemViewModelProtocol {
@@ -59,5 +60,9 @@ class CartItemVM: CartItemViewModelProtocol {
     func decreaseCartItemQuantity(for id: Int64) {
         cartItemRepository.updateQuantity(for: id, isUp: false)
         fetchCartItems()
+    }
+    
+    func getPriceSum() -> Double {
+        return cartItems.reduce(0.0) {$0 + $1.price}
     }
 }

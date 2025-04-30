@@ -12,7 +12,11 @@ class CartListViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    var tableView = UITableView()
+    var tableView: UITableView = {
+        var table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
     var cartItemViewModel: any CartItemViewModelProtocol
     
     var finishBuyingButton: GeneralButton = {
@@ -20,6 +24,7 @@ class CartListViewController: UIViewController {
                                    titleBold: true,
                                    titleTextColor: .white,
                                    backgroundColor: .buttonOrange)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -27,16 +32,18 @@ class CartListViewController: UIViewController {
         var view = UIView()
         view.backgroundColor = .viewBlue
         view.layer.cornerRadius = 10.0
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     var totalPriceTitle: UILabel = {
         var label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18.0, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
         label.textColor = .gray
         label.numberOfLines = 0
         label.textAlignment = .center
         label.text = "Total Price"
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -47,6 +54,7 @@ class CartListViewController: UIViewController {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.text = ""
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -93,15 +101,9 @@ class CartListViewController: UIViewController {
         summaryView.addSubview(totalPrice)
         self.view.addSubview(finishBuyingButton)
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 160
-        
-        summaryView.translatesAutoresizingMaskIntoConstraints = false
-        totalPriceTitle.translatesAutoresizingMaskIntoConstraints = false
-        totalPrice.translatesAutoresizingMaskIntoConstraints = false
-        finishBuyingButton.translatesAutoresizingMaskIntoConstraints = false
-        
+             
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),

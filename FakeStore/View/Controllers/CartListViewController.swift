@@ -113,9 +113,6 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.fill(cartItem: cartItemViewModel.cartItems[indexPath.row])
         cell.delegate = self
-//        cell.onQuantityChange = { [weak self] id, newQuantity in
-//            self?.cartItemViewModel.updateCartItemQuantity(for: id, newQuantity: newQuantity)
-//        }
         return cell
     }
 }

@@ -11,7 +11,7 @@ protocol CartItemRepositoryProtocol {
     func addProduct(id: Int64, name: String, quantity: Int16, price: Double, image: String)
     func fetchCartItems() -> [CartItem]
     func removeProduct(id: UUID)
-    func updateQuantity(for id:Int64, isUp: Bool) 
+    func updateQuantity(for id:Int64, isUp: Bool)
 }
 
 class CartItemRepository: CartItemRepositoryProtocol {
@@ -65,8 +65,8 @@ class CartItemRepository: CartItemRepositoryProtocol {
                 try context.save()
             }
         } catch {
-            print(error)
             //TODO: - Improve error handling
+            print(error)
         }
     }
     
@@ -90,6 +90,7 @@ class CartItemRepository: CartItemRepositoryProtocol {
                 print("ID not found!")
             }
         } catch {
+            //TODO: - Improve error handling
             print("Error: \(error)")
         }
     }

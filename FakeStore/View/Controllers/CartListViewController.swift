@@ -30,10 +30,20 @@ class CartListViewController: UIViewController {
         return view
     }()
     
+    var totalPriceTitle: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18.0, weight: .light)
+        label.textColor = .gray
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.text = "Total Price"
+        return label
+    }()
+    
     var totalPrice: UILabel = {
         var label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18.0, weight: .light)
-        label.textColor = .lightGray
+        label.textColor = .gray
         label.numberOfLines = 0
         label.textAlignment = .center
         label.text = ""
@@ -68,7 +78,7 @@ class CartListViewController: UIViewController {
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
                 if let totalPrice = self?.cartItemViewModel.getPriceSum() {
-                    self?.totalPrice.text = "$\(totalPrice)"
+                    self?.totalPrice.text = String(format: "$%.2f", totalPrice)
                 }
             }
             .store(in: &cancellables)
@@ -79,6 +89,7 @@ class CartListViewController: UIViewController {
         
         self.view.addSubview(tableView)
         self.view.addSubview(summaryView)
+        summaryView.addSubview(totalPriceTitle)
         summaryView.addSubview(totalPrice)
         self.view.addSubview(finishBuyingButton)
         
@@ -87,9 +98,8 @@ class CartListViewController: UIViewController {
         tableView.estimatedRowHeight = 160
         
         summaryView.translatesAutoresizingMaskIntoConstraints = false
-        
+        totalPriceTitle.translatesAutoresizingMaskIntoConstraints = false
         totalPrice.translatesAutoresizingMaskIntoConstraints = false
-        
         finishBuyingButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -103,8 +113,11 @@ class CartListViewController: UIViewController {
             summaryView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
             summaryView.bottomAnchor.constraint(equalTo: self.finishBuyingButton.topAnchor, constant: -24.0),
             
+            totalPriceTitle.topAnchor.constraint(equalTo: summaryView.topAnchor, constant: 8.0),
+            totalPriceTitle.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor, constant: 8.0),
+            
             totalPrice.topAnchor.constraint(equalTo: summaryView.topAnchor, constant: 8.0),
-            totalPrice.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor, constant: 8.0),
+            totalPrice.trailingAnchor.constraint(equalTo: summaryView.trailingAnchor, constant: -8.0),
 
             finishBuyingButton.heightAnchor.constraint(equalToConstant: 60.0),
             finishBuyingButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16.0),

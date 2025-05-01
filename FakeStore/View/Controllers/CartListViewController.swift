@@ -58,6 +58,28 @@ class CartListViewController: UIViewController {
         return label
     }()
     
+    var totalQuantityTitle: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
+        label.textColor = .gray
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.text = "Total Quantity"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var totalQuantity: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18.0, weight: .light)
+        label.textColor = .gray
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.text = ""
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     init (cartItemViewModel: any CartItemViewModelProtocol = AppContainer.shared.cartItemViewModel) {
         self.cartItemViewModel  = cartItemViewModel
         super.init(nibName: nil, bundle: nil)
@@ -85,6 +107,9 @@ class CartListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
+                if let totalQuantity = self?.cartItemViewModel.getQuantitySum() {
+                    self?.totalQuantity.text = "\(totalQuantity)"
+                }
                 if let totalPrice = self?.cartItemViewModel.getPriceSum() {
                     self?.totalPrice.text = String(format: "$%.2f", totalPrice)
                 }
@@ -97,6 +122,8 @@ class CartListViewController: UIViewController {
         
         self.view.addSubview(tableView)
         self.view.addSubview(summaryView)
+        summaryView.addSubview(totalQuantityTitle)
+        summaryView.addSubview(totalQuantity)
         summaryView.addSubview(totalPriceTitle)
         summaryView.addSubview(totalPrice)
         self.view.addSubview(finishBuyingButton)
@@ -110,15 +137,21 @@ class CartListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: self.summaryView.topAnchor, constant: -8.0),
             
-            summaryView.heightAnchor.constraint(equalToConstant: 120.0),
+            summaryView.heightAnchor.constraint(equalToConstant: 60.0),
             summaryView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
             summaryView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
             summaryView.bottomAnchor.constraint(equalTo: self.finishBuyingButton.topAnchor, constant: -24.0),
             
-            totalPriceTitle.topAnchor.constraint(equalTo: summaryView.topAnchor, constant: 8.0),
+            totalQuantityTitle.topAnchor.constraint(equalTo: summaryView.topAnchor, constant: 8.0),
+            totalQuantityTitle.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor, constant: 8.0),
+            
+            totalQuantity.topAnchor.constraint(equalTo: summaryView.topAnchor, constant: 8.0),
+            totalQuantity.trailingAnchor.constraint(equalTo: summaryView.trailingAnchor, constant: -8.0),
+            
+            totalPriceTitle.topAnchor.constraint(equalTo: totalQuantityTitle.bottomAnchor, constant: 4.0),
             totalPriceTitle.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor, constant: 8.0),
             
-            totalPrice.topAnchor.constraint(equalTo: summaryView.topAnchor, constant: 8.0),
+            totalPrice.topAnchor.constraint(equalTo: totalQuantity.bottomAnchor, constant: 4.0),
             totalPrice.trailingAnchor.constraint(equalTo: summaryView.trailingAnchor, constant: -8.0),
 
             finishBuyingButton.heightAnchor.constraint(equalToConstant: 60.0),

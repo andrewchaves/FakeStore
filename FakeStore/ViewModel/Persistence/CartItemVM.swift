@@ -13,7 +13,7 @@ protocol CartItemViewModelProtocol: ObservableObject {
     var cartItemsPublisher: Published<[CartItem]>.Publisher { get }
     func fetchCartItems()
     func addProduct(_ product: ProductForUI)
-    func removeCartItem(id: UUID)
+    func removeCartItem(id: Int64)
     func increaseCartItemQuantity(for id: Int64)
     func decreaseCartItemQuantity(for id: Int64)
     func getPriceSum() -> Double
@@ -48,7 +48,7 @@ class CartItemVM: CartItemViewModelProtocol {
         fetchCartItems()
     }
     
-    func removeCartItem(id: UUID) {
+    func removeCartItem(id: Int64) {
         cartItemRepository.removeProduct(id: id)
         fetchCartItems()
     }

@@ -10,7 +10,7 @@ import CoreData
 protocol CartItemRepositoryProtocol {
     func addProduct(id: Int64, name: String, quantity: Int16, price: Double, image: String)
     func fetchCartItems() -> [CartItem]
-    func removeProduct(id: UUID)
+    func removeProduct(id: Int64)
     func updateQuantity(for id:Int64, isUp: Bool)
 }
 
@@ -53,10 +53,10 @@ class CartItemRepository: CartItemRepositoryProtocol {
         }
     }
     
-    func removeProduct(id: UUID) {
+    func removeProduct(id: Int64) {
         let context = coreDataManager.viewContext
         let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "id == %lld", id as CVarArg)
         
         do {
             let cartItems = try context.fetch(fetchRequest)

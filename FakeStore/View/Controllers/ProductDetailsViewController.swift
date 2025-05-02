@@ -86,7 +86,7 @@ class ProductDetailsViewController: UIViewController {
     }()
     
     init (productToDisplay: ProductForUI,
-          cartItemViewModel: any CartItemViewModelProtocol = AppContainer.shared.cartItemViewModel) {
+          cartItemViewModel: any CartItemViewModelProtocol = CartItemVM(cartItemRepository: AppContainer.shared.cartItemRepository)) {
         self.productToDisplay = productToDisplay
         coreDataManager = CoreDataManager(modelName: "FakeStore")
         cartItemRepository  = CartItemRepository(coreDataManager: coreDataManager)

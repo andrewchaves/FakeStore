@@ -80,7 +80,7 @@ class CartListViewController: UIViewController {
         return label
     }()
     
-    init (cartItemViewModel: any CartItemViewModelProtocol = AppContainer.shared.cartItemViewModel) {
+    init (cartItemViewModel: any CartItemViewModelProtocol = CartItemVM(cartItemRepository: AppContainer.shared.cartItemRepository)) {
         self.cartItemViewModel  = cartItemViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -100,6 +100,11 @@ class CartListViewController: UIViewController {
         
         setupView()
         observeCartItems()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        cartItemViewModel.fetchCartItems()
     }
     
     func observeCartItems() {

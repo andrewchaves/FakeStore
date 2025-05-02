@@ -12,11 +12,9 @@ final class AppContainer {
     
     var coreDataManager: CoreDataManager
     var cartItemRepository: CartItemRepository
-    var cartItemViewModel: CartItemVM
     
     private init() {
         self.coreDataManager = CoreDataManager(modelName: "FakeStore")
         self.cartItemRepository = CartItemRepository(coreDataManager: coreDataManager)
-        self.cartItemViewModel = CartItemVM(cartItemRepository: cartItemRepository)
     }
 }

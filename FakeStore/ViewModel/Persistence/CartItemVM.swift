@@ -40,11 +40,13 @@ class CartItemVM: CartItemViewModelProtocol {
     
     func addProduct(_ product: ProductForUI) {
         let product = product.toProduct()
-        cartItemRepository.addProduct(id: Int64(product.id),
-                                      name: product.title,
-                                      quantity:  1,
-                                      price: product.price,
-                                      image: product.image)
+        if !cartItems.contains(where: { $0.id == product.id}) {
+            cartItemRepository.addProduct(id: Int64(product.id),
+                                          name: product.title,
+                                          quantity:  1,
+                                          price: product.price,
+                                          image: product.image)
+        }
         fetchCartItems()
     }
     

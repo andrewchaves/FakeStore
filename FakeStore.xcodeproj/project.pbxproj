@@ -123,8 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				876B04D72D499AAB004F77C7 /* FakeStore */,
-				876B04B22D4994AA004F77C7 /* FakeStoreTests */,
 				876B04BC2D4994AA004F77C7 /* FakeStoreUITests */,
+				876B04B22D4994AA004F77C7 /* FakeStoreTests */,
 				876B04FC2D5588DC004F77C7 /* Frameworks */,
 				876B04972D4994A8004F77C7 /* Products */,
 			);

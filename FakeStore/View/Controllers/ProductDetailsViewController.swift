@@ -12,8 +12,6 @@ import SDWebImage
 class ProductDetailsViewController: UIViewController {
     
     var productToDisplay: ProductForUI
-    var coreDataManager: CoreDataManager
-    var cartItemRepository: CartItemRepository
     var cartItemViewModel: any CartItemViewModelProtocol
     
     var cartButton: UIBarButtonItem = {
@@ -88,8 +86,6 @@ class ProductDetailsViewController: UIViewController {
     init (productToDisplay: ProductForUI,
           cartItemViewModel: any CartItemViewModelProtocol = CartItemVM(cartItemRepository: AppContainer.shared.cartItemRepository)) {
         self.productToDisplay = productToDisplay
-        coreDataManager = CoreDataManager(modelName: "FakeStore")
-        cartItemRepository  = CartItemRepository(coreDataManager: coreDataManager)
         self.cartItemViewModel  = cartItemViewModel
         super.init(nibName: nil, bundle: nil)
     }

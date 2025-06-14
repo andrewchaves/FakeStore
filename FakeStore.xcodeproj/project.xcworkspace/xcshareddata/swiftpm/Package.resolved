@@ -1,6 +1,15 @@
 {
-  "originHash" : "990602f943d142d26b1a5421abe2a243e2e1077d090e31e151c33e3ec768723e",
+  "originHash" : "52446854074fac2a157e22fef5a2b547314cb78dc906a7361f28bfb23bc5b4a1",
   "pins" : [
+    {
+      "identity" : "fakestorecore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/andrewchaves/FakeStoreCore",
+      "state" : {
+        "branch" : "main",
+        "revision" : "fe5d7263441a90d6b8c22d3b9c9e8e5cdce46756"
+      }
+    },
     {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",

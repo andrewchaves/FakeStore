@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SDWebImage
+import FakeStoreCore
 
 class ProductDetailsViewController: UIViewController {
     
@@ -84,7 +85,7 @@ class ProductDetailsViewController: UIViewController {
     }()
     
     init (productToDisplay: ProductForUI,
-          cartItemViewModel: any CartItemViewModelProtocol = CartItemVM(cartItemRepository: AppContainer.shared.cartItemRepository)) {
+          cartItemViewModel: any CartItemViewModelProtocol) {
         self.productToDisplay = productToDisplay
         self.cartItemViewModel  = cartItemViewModel
         super.init(nibName: nil, bundle: nil)
@@ -198,7 +199,7 @@ class ProductDetailsViewController: UIViewController {
     }
     
     @objc func cartButtonTapped() {
-        let carListVC = CartListViewController()
+        let carListVC = CartListViewController(cartItemViewModel: CartItemVM(cartItemRepository: AppContainer.shared.cartItemRepository))
         carListVC.navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.pushViewController(carListVC, animated: true)
     }

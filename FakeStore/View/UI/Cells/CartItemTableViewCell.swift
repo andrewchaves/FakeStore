@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FakeStoreCore
 
 protocol CartItemTableViewCellDelegate: AnyObject {
     func upButtonTapped(_ cell: CartItemTableViewCell, id: Int64)

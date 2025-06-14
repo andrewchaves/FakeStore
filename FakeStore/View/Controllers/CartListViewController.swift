@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FakeStoreCore
 
 class CartListViewController: UIViewController {
     
@@ -80,7 +81,7 @@ class CartListViewController: UIViewController {
         return label
     }()
     
-    init (cartItemViewModel: any CartItemViewModelProtocol = CartItemVM(cartItemRepository: AppContainer.shared.cartItemRepository)) {
+    init (cartItemViewModel: any CartItemViewModelProtocol) {
         self.cartItemViewModel  = cartItemViewModel
         super.init(nibName: nil, bundle: nil)
     }

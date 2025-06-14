@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import FakeStoreCore
 
 class MainListViewController: UIViewController {
     var tableView = UITableView()
@@ -97,7 +98,7 @@ class MainListViewController: UIViewController {
     }
     //MARK: - Actions
     @objc func cartButtonTapped() {
-        let cartListVC = CartListViewController()
+        let cartListVC = CartListViewController(cartItemViewModel: CartItemVM(cartItemRepository: AppContainer.shared.cartItemRepository))
         cartListVC.navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.pushViewController(cartListVC, animated: true)
     }
@@ -141,7 +142,7 @@ extension MainListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let productDetailsVC = ProductDetailsViewController(productToDisplay: productVM.filteredProducts[indexPath.row])
+        let productDetailsVC = ProductDetailsViewController(productToDisplay: productVM.filteredProducts[indexPath.row], cartItemViewModel: CartItemVM(cartItemRepository: AppContainer.shared.cartItemRepository))
         productDetailsVC.navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.pushViewController(productDetailsVC, animated: true)
     }

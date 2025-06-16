@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		870A536F2DFE13530072F5EE /* FakeStoreCore in Frameworks */ = {isa = PBXBuildFile; productRef = 870A536E2DFE13530072F5EE /* FakeStoreCore */; };
+		870A53712DFFB9180072F5EE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 870A53702DFFB9180072F5EE /* README.md */; };
+		870A53722DFFB9180072F5EE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 870A53702DFFB9180072F5EE /* README.md */; };
+		870A53732DFFB9180072F5EE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 870A53702DFFB9180072F5EE /* README.md */; };
 		876B04D92D499AAB004F77C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04CD2D499AAB004F77C7 /* AppDelegate.swift */; };
 		876B04DA2D499AAB004F77C7 /* FakeStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 876B04CF2D499AAB004F77C7 /* FakeStore.xcdatamodeld */; };
 		876B04DB2D499AAB004F77C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B04D52D499AAB004F77C7 /* SceneDelegate.swift */; };
@@ -40,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		870A53702DFFB9180072F5EE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		876B04962D4994A8004F77C7 /* FakeStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		876B04AF2D4994AA004F77C7 /* FakeStoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeStoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		876B04B92D4994AA004F77C7 /* FakeStoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeStoreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +104,7 @@
 		876B048D2D4994A8004F77C7 = {
 			isa = PBXGroup;
 			children = (
+				870A53702DFFB9180072F5EE /* README.md */,
 				876B04D72D499AAB004F77C7 /* FakeStore */,
 				876B04BC2D4994AA004F77C7 /* FakeStoreUITests */,
 				876B04B22D4994AA004F77C7 /* FakeStoreTests */,
@@ -307,6 +312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				870A53732DFFB9180072F5EE /* README.md in Resources */,
 				876B04DD2D499AAB004F77C7 /* Assets.xcassets in Resources */,
 				876B04DF2D499AAB004F77C7 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -316,6 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				870A53712DFFB9180072F5EE /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +330,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				870A53722DFFB9180072F5EE /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
